@@ -1,0 +1,56 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+using namespace std;
+int randomnum(){
+    int ran_num;
+    srand(time(0));
+    ran_num=rand()%10+1;
+    return ran_num;
+}
+string trackUserAnswer(){
+    string userAnswer;
+    while (userAnswer.compare("n")&& userAnswer.compare("y")){
+        cout << "\n Do you want to play again (y/n)?";
+        cin >> userAnswer;
+    }
+    return userAnswer;
+}
+int main(){
+    string name;
+    int deposit;
+    int bet;
+    int guessnumber;
+    string userAnswer;
+    cout<< "Enter Your Name :";
+    cin>> name;
+    cout<< "Enter Deposit amout to play game : $";
+    cin>> deposit;
+    do{
+        int randomnumber=randomnum();
+        cout<< "Your current balance is $ " << deposit <<"\n";
+        cout<< name <<", enter money to bet : $";
+        cin>> bet;
+        if (bet>deposit){
+            cout<< "Woops! Running out of money~ You've been banished from casino!" <<"\n";
+            return 0;
+        }
+        cout<< "Guess your number to bet between 1 to 10 :";
+        cin>> guessnumber;
+            if (randomnumber==guessnumber){
+                deposit=deposit+10*bet;
+                cout<< "congraulations, you win!" <<"\n";
+        }
+            else{
+                deposit=deposit-bet;
+                cout<< "Bad Luck this time!! You lost $ " <<bet <<"\n";
+                cout<< "The winning number was : " << randomnumber <<"\n";
+        }
+        cout <<name << ", You have $ " << deposit;
+        userAnswer = trackUserAnswer();
+    }
+    while(userAnswer.compare("y")==0);
+    return 0;
+    }
+
